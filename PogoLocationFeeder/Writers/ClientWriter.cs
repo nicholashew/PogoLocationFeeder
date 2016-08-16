@@ -124,6 +124,11 @@ namespace PogoLocationFeeder.Writers
                     Log.Info($"Ignoring {target.Id}, it's not in Filterlist");
                     continue;
                 }
+                else if (!GlobalSettings.GeoLocationBounds.Intersects(target.Latitude, target.Longitude) && GlobalSettings.UseGeoLocationBoundsFilter)
+                {
+                    Log.Info($"Ignoring {target.Id} (lat:\"{target.Latitude}\",lng:\"{target.Longitude}\"), it's not in GeoLocationBounds Filter");
+                    continue;
+                }
 
                 foreach (var socket in _arrSocket) // Repeat for each connected client (socket held in a dynamic array)
                 {
