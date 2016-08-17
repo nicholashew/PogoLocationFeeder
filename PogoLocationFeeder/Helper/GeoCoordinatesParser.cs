@@ -86,6 +86,16 @@ namespace PogoLocationFeeder.Helper
 
             return true;
         }
+
+        public static bool Validate(GeoCoordinates latLng)
+        {
+            return Validate(latLng.Latitude, latLng.Longitude);
+        }
+
+        public static bool Validate(LatLngBounds bounds)
+        {
+            return (Validate(bounds.SouthWest) && Validate(bounds.NorthEast));
+        }
     }
 
     public class LatLngBounds
